@@ -85,12 +85,19 @@ public class AlquilerTest {
         
         Item i1=new Item(sa.consultarTipoItem(1), 55, "Los 4 Fantasticos", "Los 4 Fantásticos  es una película de superhéroes  basada en la serie de cómic homónima de Marvel.", java.sql.Date.valueOf("2005-06-08"), 2000, "DVD", "Ciencia Ficcion");        
         sa.registrarCliente(new Cliente("Juana Perez",9844,"24234","calle 123","aa@gmail.com"));
+        sa.registrarCliente(new Cliente("Juan Perdomo",9855,"24235","calle 124","bb@gmail.com"));
         sa.registrarItem(i1);
                 
         Item item=sa.consultarItem(55);
         
-        sa.registrarAlquilerCliente(java.sql.Date.valueOf("2005-12-20"), 9843, item, 5);
-
+        sa.registrarAlquilerCliente(java.sql.Date.valueOf("2005-12-20"), 9844, item, 5);
+        try{
+            sa.registrarAlquilerCliente(java.sql.Date.valueOf("2005-12-20"), 9855, item, 10);
+            fail("Deja registrar el alquiler a pesar que ya esta reservada");
+        }
+        catch(ExcepcionServiciosAlquiler e){
+            assertTrue("no debe dar error",true);
+        }
                 
     }
     
