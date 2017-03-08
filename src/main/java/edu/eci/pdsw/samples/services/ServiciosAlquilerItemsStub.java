@@ -55,7 +55,13 @@ public class ServiciosAlquilerItemsStub extends ServiciosAlquiler implements Ser
     public List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler {
         return  new LinkedList<>(clientes.values());
     }
-
+      /**
+* @obj registrar un cliente en el sistema
+* @param p el nuevo cliente
+* @pre p!=null
+* @pos el cliente queda disponible para futuros alquileres
+* @throws ExcepcionServiciosAlquiler si el cliente ya se encuentra registrado
+*/
     @Override
     public void registrarCliente(Cliente p) throws ExcepcionServiciosAlquiler {
         if (!clientes.containsKey(p.getDocumento())) {

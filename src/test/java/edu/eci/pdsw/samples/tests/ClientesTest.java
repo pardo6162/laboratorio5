@@ -7,6 +7,9 @@ package edu.eci.pdsw.samples.tests;
 
 import edu.eci.pdsw.samples.entities.Cliente;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
+import edu.eci.pdsw.samples.services.ServiciosAlquilerItemsStub;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -34,7 +37,19 @@ public class ClientesTest {
         String direccion="KRA 70 D # 66 78";
         String email="juan.mantilla@hotmail.com";
         Cliente nuevoC=new Cliente(nombre,documento,telefono,direccion,email);
-        assertEquals("no existe el nombre",nombre,nuevoC.getNombre());
+        ServiciosAlquilerItemsStub sais=new ServiciosAlquilerItemsStub();
+        try{
+            sais.registrarCliente(nuevoC);
+            Cliente copiaC=sais.consultarCliente(documento);
+            assertEquals("no existe el nombre",nuevoC.getDocumento(),copiaC.getDocumento());
+            assertEquals("no existe el nombre",nuevoC.getDireccion(),copiaC.getDireccion());
+            assertEquals("no existe el nombre",nuevoC.getEmail(),copiaC.getEmail());
+            assertEquals("no existe el nombre",nuevoC.getTelefono(),copiaC.getTelefono());
+            
+           
+        }catch(Exception e){}
+            
+        
     }
     
     
