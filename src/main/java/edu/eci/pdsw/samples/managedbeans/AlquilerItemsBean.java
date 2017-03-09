@@ -31,6 +31,7 @@ public class AlquilerItemsBean implements Serializable {
     long multas =0;
     String vista="RegistroClientes";
     int nid=0;
+    long valcot=0;
     public String cambiarVista(Cliente c){
         nidentificacion=c.getDocumento();
         ntelefono=c.getTelefono();
@@ -75,11 +76,29 @@ public class AlquilerItemsBean implements Serializable {
     }
     
     public long getMultas(){
+        multas =0;
+        Cliente cli =sp.consultarCliente(nidentificacion);
+        for(int i=0; i< sp.consultarCliente(nidentificacion)
         return  multas;
     }
     public void setMultas(long mult){
         multas=mult;
     }
+    
+    public int getNid(){
+        return  nid;
+    }
+    public void setNid(int num){
+        nid=num;
+    }
+    
+    public long getValcot(){
+        return  valcot;
+    }
+    public void setValcot(long num){
+        valcot=num;
+    }
+    
     public List<Cliente> getClientes() {
         List<Cliente> clientes= new ArrayList<Cliente>();
         try{
@@ -112,5 +131,7 @@ public class AlquilerItemsBean implements Serializable {
             error=true;
         }
     }
+    
+    
 
 }
