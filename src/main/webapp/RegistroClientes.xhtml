@@ -14,18 +14,34 @@
                 <p:outputLabel value="#{client.nombre}">
                 </p:outputLabel>
             </p:column>
-            <p:column>
-                 <p:selectBooleanCheckbox value="#{selected.value}" />
+            <p:column headerText="SELECCIONAR">
+                 <p:selectBooleanCheckbox value="true" />
             </p:column>
         </p:dataTable>
-        <form>
-            <p:inputText  required="true" value="">DIGITE EL DOCUMENTO </p:inputText>
+        <h:form >
+            <div align="center">
+            <h2> REGISTRO DE CLIENTE </h2>
             <br/>
             <br/>
-            <p:inputText  required="true" value="">DIGITE EL NOMBRE</p:inputText>
+            <p:inputText   value="#{AlquilerItems.nidentificacion}">DOCUMENTO </p:inputText>
+            <br/>
+            <br/>
+            <p:inputText  value="#{AlquilerItems.nnombre}">NOMBRE </p:inputText>
             <br/> 
             <br/>
-        </form>
+            <p:inputText  value="#{AlquilerItems.ntelefono}">TELEFONO </p:inputText>
+            <br/> 
+            <br/>
+            <p:inputText  value="#{AlquilerItems.ndireccion}">DIRECCION </p:inputText>
+            <br/> 
+            <br/>
+            <p:inputText  value="#{AlquilerItems.nemail}">E-MAIL </p:inputText>
+             <br/> 
+            <br/>
+            <p:commandButton id="select" value="REGISTRAR" update=":Clientes" actionListener="#{AlquilerItems.registrarCliente()}">
+            </p:commandButton>
+            </div>
+        </h:form>
   
     </h:body>
 </html>
