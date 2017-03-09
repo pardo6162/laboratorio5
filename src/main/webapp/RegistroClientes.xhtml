@@ -5,7 +5,27 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head></h:head>
     <h:body>
-        
+        <p:dataTable id="Clientes" var="client" value="#{AlquilerItems.clientes}">
+            <p:column  headerText="IDENTIFICACION">
+                <p:outputLabel value="#{client.documento}">
+                </p:outputLabel>
+            </p:column>
+            <p:column  headerText="NOMBRE">
+                <p:outputLabel value="#{client.nombre}">
+                </p:outputLabel>
+            </p:column>
+            <p:column>
+                 <p:selectBooleanCheckbox value="#{selected.value}" />
+            </p:column>
+        </p:dataTable>
+        <form>
+            <p:inputText  required="true" value="">DIGITE EL DOCUMENTO </p:inputText>
+            <br/>
+            <br/>
+            <p:inputText  required="true" value="">DIGITE EL NOMBRE</p:inputText>
+            <br/> 
+            <br/>
+        </form>
   
     </h:body>
 </html>
