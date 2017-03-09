@@ -144,11 +144,21 @@ public class ServiciosAlquilerItemsStub extends ServiciosAlquiler implements Ser
         ItemRentado ir=new ItemRentado(item,date,java.sql.Date.valueOf(ld2));
 
         if (clientes.containsKey(docu)) {
-            Cliente c = clientes.get(docu);
-            c.getRentados().add(ir);
-            itemsDisponibles.remove(ir.getItem().getId());
-            itemsrentados.put(item.getId(), ir);
-            mapaPrestamosPorIdCliente.put(item.getId(),docu);
+            if(itemsDisponibles.get(item.getId()) == null){
+                if(itemsrentados.get(item.getId()) == null){
+                    throw new ExcepcionServiciosAlquiler("No existe el item indicado");
+                }
+                else{
+                    throw new ExcepcionServiciosAlquiler("Ya esta alquilado este item");
+                }
+            }
+            else{
+                Cliente c = clientes.get(docu);
+                c.getRentados().add(ir);
+                itemsDisponibles.remove(ir.getItem().getId());
+                itemsrentados.put(item.getId(), ir);
+                mapaPrestamosPorIdCliente.put(item.getId(),docu);
+            }
         } else {
             throw new ExcepcionServiciosAlquiler("No existe el cliente con el documento " + docu);
         }
