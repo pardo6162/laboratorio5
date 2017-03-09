@@ -29,6 +29,8 @@ import static org.junit.Assert.*;
  * 
  * CE2: No debe dejar alquilar una pelicula que ya esta alquilada por alguien más
  * CE3: No debe dejar alquilar un item que no existe
+ * CE4: La multa si se devuelve antes del plazo debe de ser 0
+ * CE5: No debe dejar consultar la multa de un item que no esta en alquiler
  * 
  * 
  * 
@@ -135,6 +137,49 @@ public class AlquilerTest {
         
         
                 
+    }
+    
+    @Test
+    public void CE4Test() throws ExcepcionServiciosAlquiler{
+        ServiciosAlquiler sa=ServiciosAlquilerItemsStub.getInstance();
+        
+        
+        Item i1=new Item(sa.consultarTipoItem(1), 77, "Los 4 Fantasticos", "Los 4 Fantásticos  es una película de superhéroes  basada en la serie de cómic homónima de Marvel.", java.sql.Date.valueOf("2005-06-08"), 2000, "DVD", "Ciencia Ficcion");        
+        sa.registrarCliente(new Cliente("Mr Mundy",1111,"24234","calle 123","aa@gmail.com"));
+        sa.registrarItem(i1);
+        
+
+                
+        Item item=sa.consultarItem(77);
+        
+        sa.registrarAlquilerCliente(java.sql.Date.valueOf("2005-12-20"), 1111, item, 5);
+        
+        
+        assertEquals("No se calcula correctamente la multa (0) "
+                + "cuando la devolucion se realiza antes del vencimiento"
+                ,0,sa.consultarMultaAlquiler(77, java.sql.Date.valueOf("2005-12-23")));
+                
+    }
+    
+    @Test
+    public void CE5Test() throws ExcepcionServiciosAlquiler{
+        ServiciosAlquiler sa=ServiciosAlquilerItemsStub.getInstance();
+        
+        
+        Item i1=new Item(sa.consultarTipoItem(1), 88, "Los 4 Fantasticos", "Los 4 Fantásticos  es una película de superhéroes  basada en la serie de cómic homónima de Marvel.", java.sql.Date.valueOf("2005-06-08"), 2000, "DVD", "Ciencia Ficcion");        
+        sa.registrarCliente(new Cliente("Jon Doe",2222,"24234","calle 123","aa@gmail.com"));
+        sa.registrarItem(i1);
+
+                
+        Item item=sa.consultarItem(88);
+        
+        try{
+            long cant = sa.consultarMultaAlquiler(88, java.sql.Date.valueOf("2005-12-23"));
+            fail("consulta el costo del alquiler que no se registro");
+        }
+        catch(ExcepcionServiciosAlquiler e){
+            assertTrue("No puede consultar la multa de un alquiler que no existe",true);
+        }   
     }
     
     
