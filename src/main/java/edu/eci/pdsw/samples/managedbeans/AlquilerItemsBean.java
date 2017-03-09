@@ -29,7 +29,17 @@ public class AlquilerItemsBean implements Serializable {
     String nemail=null;
     boolean error=false;
     long multas =0;
+    String vista="RegistroClientes";
     int nid=0;
+    public String cambiarVista(Cliente c){
+        nidentificacion=c.getDocumento();
+        ntelefono=c.getTelefono();
+        ndireccion=c.getDireccion();
+        nnombre=c.getNombre(    );
+        nemail=c.getEmail();
+        return "RegistroClienteItem";
+
+    }
     public AlquilerItemsBean() {
         
     }

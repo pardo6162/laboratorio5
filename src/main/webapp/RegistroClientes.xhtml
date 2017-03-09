@@ -5,43 +5,72 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head></h:head>
     <h:body>
-        <p:dataTable id="Clientes" var="client" value="#{AlquilerItems.clientes}">
-            <p:column  headerText="IDENTIFICACION">
-                <p:outputLabel value="#{client.documento}">
-                </p:outputLabel>
-            </p:column>
-            <p:column  headerText="NOMBRE">
-                <p:outputLabel value="#{client.nombre}">
-                </p:outputLabel>
-            </p:column>
-            <p:column headerText="SELECCIONAR">
-                 <p:selectBooleanCheckbox value="true" />
-            </p:column>
-        </p:dataTable>
+        <p:layout style="min-width:400px;min-height:200px;">
+            <p:layoutUnit position="west" resizable="true"  minSize="40" maxSize="600">
+                <p:dataTable id="Clientes" var="client" value="#{AlquilerItems.clientes}">
+                    <p:column  headerText="IDENTIFICACION">
+                        <p:outputLabel value="#{client.documento}">
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column  headerText="NOMBRE">
+                        <p:outputLabel value="#{client.nombre}">
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column headerText="SELECCIONAR">
+                        <p:commandButton id="select" value="SELECCION"  action="#{AlquilerItems.cambiarVista(client)}">
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:layoutUnit>
+            <p:layoutUnit position="center" resizable="true"  minSize="40" maxSize="300">
         <h:form >
-            <div align="center">
             <h2> REGISTRO DE CLIENTE </h2>
             <br/>
             <br/>
-            <p:inputText   value="#{AlquilerItems.nidentificacion}">DOCUMENTO </p:inputText>
+            DOCUMENTO
+            <br/>
+            <p:inputText  id="documento"  value="#{AlquilerItems.nidentificacion}"  > 
+            <f:validateDoubleRange minimum="0"  />
+            </p:inputText>
+            <p:outputLabel id="demo"></p:outputLabel>
             <br/>
             <br/>
-            <p:inputText  value="#{AlquilerItems.nnombre}">NOMBRE </p:inputText>
+            NOMBRE
+            <br/>
+            <p:inputText  value="#{AlquilerItems.nnombre}"> </p:inputText>
             <br/> 
             <br/>
-            <p:inputText  value="#{AlquilerItems.ntelefono}">TELEFONO </p:inputText>
+            TELEFONO
+            <br/>
+            <p:inputText  value="#{AlquilerItems.ntelefono}"> </p:inputText>
             <br/> 
             <br/>
-            <p:inputText  value="#{AlquilerItems.ndireccion}">DIRECCION </p:inputText>
+            DIRECCION
+            <br/>
+            <p:inputText  value="#{AlquilerItems.ndireccion}"> </p:inputText>
             <br/> 
             <br/>
-            <p:inputText  value="#{AlquilerItems.nemail}">E-MAIL </p:inputText>
+            E-MAIL
+            <br/>
+            <p:inputText  value="#{AlquilerItems.nemail}"> </p:inputText>
              <br/> 
             <br/>
             <p:commandButton id="select" value="REGISTRAR" update=":Clientes" actionListener="#{AlquilerItems.registrarCliente()}">
             </p:commandButton>
-            </div>
+            
         </h:form>
-  
+            </p:layoutUnit>
+        </p:layout>
+        <script>
+            function validateNumber() {
+                var inpObj = document.getElementById("documento");
+                if (inpObj.checkValidity() == false) {
+                    document.getElementById("demo").innerHTML = inpObj.validationMessage;
+                } else {
+                document.getElementById("demo").innerHTML = "Input OK";
+            } 
+        } 
+        </script>
+
     </h:body>
 </html>
