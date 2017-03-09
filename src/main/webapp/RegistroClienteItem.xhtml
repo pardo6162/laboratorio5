@@ -5,7 +5,58 @@
     <h:head></h:head>
 
     <h:body>
-
-    </h:body>
+    <p:layout style="min-width:400px;min-height:200px;">
+    <p:layoutUnit position="west" resizable="true"  minSize="40" maxSize="400">
+        <div align='center'>
+            <h3>DATOS DEL CLIENTE</h3>
+            <br></br>
+            NOMBRE 
+            <p:outputLabel id="nombreC" value="#{AlquilerItems.nnombre}" />
+            <br></br>
+            ID 
+            <p:outputLabel id="idC" value="#{AlquilerItems.nidentificacion}" />
+            <br></br>
+            MULTAS ACTUALES
+            <br></br>
+            <p:outputLabel id="multas" value="#{AlquilerItems.multas}" /> PESOS
+            <br></br>
+            <br></br>
+            <br></br>
+        </div>
+    </p:layoutUnit>
+    <p:layoutUnit position="center">
+        <p:dataTable var="alquiler" value="#{AlquilerItems.alquiler}">
+            <p:column headerText="ID">
+                <p:outputLabel value="#{alquiler.id}">
+                </p:outputLabel>
+            </p:column>
+             <p:column headerText="NOMBRE">
+                 <p:outputLabel value="#{alquiler.item.nombre}">
+                </p:outputLabel>
+            </p:column>
+             <p:column headerText="FECHA INICIO">
+                 <p:outputLabel value="#{alquiler.fechainiciorenta}">
+                </p:outputLabel>
+            </p:column>
+            <p:column headerText="FECHA FIN">
+                <p:outputLabel value="#{alquiler.fechafinrenta}">
+                </p:outputLabel>
+            </p:column>
+        </p:dataTable>
+    </p:layoutUnit>
+        <p:layoutUnit position="east" resizable="true"  minSize="40" maxSize="400">
+        <h:form id="formalquiler">
+            <div align="center">
+            <h3>REGISTRAR NUEVO ALQUILER</h3>
+            <p:inputText  required="true" value="#{alquiler.nid}">ID DEL ITEM </p:inputText>
+            <br></br>
+            NUMERO DE DÍAS
+            <p:spinner id="dias" value="1" min="0"  size="8" binding="#{dias}"/>
+            <br></br>
+            </div>
+        </h:form>
+    </p:layoutUnit>
+</p:layout>       
+</h:body>
 
 </html>

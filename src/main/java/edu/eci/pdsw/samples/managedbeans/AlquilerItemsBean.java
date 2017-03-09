@@ -5,7 +5,7 @@
  */
 package edu.eci.pdsw.samples.managedbeans;
 
-import edu.eci.pdsw.samples.entities.Cliente;
+import edu.eci.pdsw.samples.entities.*;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,6 +28,8 @@ public class AlquilerItemsBean implements Serializable {
     String ndireccion=null;
     String nemail=null;
     boolean error=false;
+    long multas =0;
+    int nid=0;
     public AlquilerItemsBean() {
         
     }
@@ -61,6 +63,13 @@ public class AlquilerItemsBean implements Serializable {
     public void setNemail(String mail){
         nemail=mail;
     }
+    
+    public long getMultas(){
+        return  multas;
+    }
+    public void setMultas(long mult){
+        multas=mult;
+    }
     public List<Cliente> getClientes() {
         List<Cliente> clientes= new ArrayList<Cliente>();
         try{
@@ -70,6 +79,17 @@ public class AlquilerItemsBean implements Serializable {
         }
         return  clientes;
     }
+    
+    public List<ItemRentado> getAlquiler() {
+        List<ItemRentado> alquiler= new ArrayList<ItemRentado>();
+        try{
+            alquiler = sp.consultarItemsCliente(nidentificacion);
+        }catch(Exception e){
+           error=true; 
+        }
+        return  alquiler;
+    }
+    
     public void registrarCliente(){
         try{
             sp.registrarCliente(new Cliente(nnombre,nidentificacion,ntelefono,ndireccion,nemail));
