@@ -8,7 +8,10 @@ package edu.eci.pdsw.samples.managedbeans;
 import edu.eci.pdsw.samples.entities.*;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.io.Serializable;
+import java.time.Instant;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -38,6 +41,7 @@ public class AlquilerItemsBean implements Serializable {
         ndireccion=c.getDireccion();
         nnombre=c.getNombre(    );
         nemail=c.getEmail();
+        
         return "RegistroClienteItem";
 
     }
@@ -76,9 +80,20 @@ public class AlquilerItemsBean implements Serializable {
     }
     
     public long getMultas(){
-        multas =0;
-        Cliente cli =sp.consultarCliente(nidentificacion);
-        for(int i=0; i< sp.consultarCliente(nidentificacion)
+        try{
+            multas =0;
+            Cliente c = sp.consultarCliente(nidentificacion);
+            ArrayList<ItemRentado> lista = c.getRentados();
+            for(int i =0; i< lista.size(); i++){
+                java.util.Date fecha = new Date();
+                java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
+                multas = multas + sp.consultarMultaAlquiler(lista.get(i).getItem().getId() , fechaSQL);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
         return  multas;
     }
     public void setMultas(long mult){

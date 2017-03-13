@@ -275,8 +275,11 @@ public class ServiciosAlquilerItemsStub extends ServiciosAlquiler implements Ser
         
         ItemRentado ir1=new ItemRentado(i1, java.sql.Date.valueOf("2017-01-01"), java.sql.Date.valueOf("2017-03-12"));
         ItemRentado ir2=new ItemRentado(i2, java.sql.Date.valueOf("2017-01-04"), java.sql.Date.valueOf("2017-04-7"));
-        ItemRentado ir3=new ItemRentado(i1, java.sql.Date.valueOf("2017-01-07"), java.sql.Date.valueOf("2017-07-12"));
+        ItemRentado ir3=new ItemRentado(i3, java.sql.Date.valueOf("2017-01-07"), java.sql.Date.valueOf("2017-07-12"));
         
+        itemsrentados.put(i1.getId(),ir1);
+        itemsrentados.put(i2.getId(),ir2);
+        itemsrentados.put(i3.getId(),ir3);
         ArrayList<ItemRentado> list1 = new ArrayList<>();
         list1.add(ir1);
         ArrayList<ItemRentado> list2 = new ArrayList<>();
