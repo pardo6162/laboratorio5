@@ -100,12 +100,12 @@ public class AlquilerItemsBean implements Serializable {
         multas=mult;
     }
     
-    public int getNid(){
+    /*public int getNid(){
         return  nid;
     }
     public void setNid(int num){
         nid=num;
-    }
+    }*/
     
     public long getValcot(){
         return  valcot;
@@ -144,6 +144,35 @@ public class AlquilerItemsBean implements Serializable {
             nemail=null;
         }catch(Exception e){
             error=true;
+        }
+    }
+    
+    public void cotizar(int iditem, int dias){
+        List<Item> agria = sp.consultarItemsDisponibles();
+        boolean entra = false;
+        for(int i=0; i< agria.size();i++){
+            if(agria.get(i).getId() == iditem) entra = true;
+        }
+        if(entra){
+            try{
+                valcot =sp.consultarCostoAlquiler(iditem, dias);
+            }
+            catch(Exception e){
+            }
+        }
+    }
+    
+    public void agregarAlquiler(int iditem, int dias){
+        try{
+            Cliente c = sp.consultarCliente(nidentificacion);
+            Item it = sp.consultarItem(iditem);
+            java.util.Date fecha = new Date();
+            java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
+            long docu = c.getDocumento();
+            sp.registrarAlquilerCliente(fechaSQL, docu, it, dias);
+            valcot=0;
+        }
+        catch(Exception e){
         }
     }
     

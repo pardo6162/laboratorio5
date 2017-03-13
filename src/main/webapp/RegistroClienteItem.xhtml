@@ -48,19 +48,19 @@
         <h:form id="formalquiler">
             <div align="center">
             <h3>REGISTRAR NUEVO ALQUILER</h3>
-            <p:inputText  required="true" value="#{AlquilerItems.nid}">ID DEL ITEM </p:inputText>
+            <p:spinner  required="true" min="0" size ="8" binding="#{nid}">ID DEL ITEM </p:spinner>
             <br></br>
             NUMERO DE DÍAS
             <p:spinner id="dias" value="1" min="0"  size="8" binding="#{dias}"/>
             <br></br>
-            <p:commandButton id="alquilarN" value="COTIZAR" update="valcot" actionListener="#{AlquilerItems.cotizar(nid,dias.value)}">
+            <p:commandButton id="alquilarN" value="COTIZAR" update="valcot" actionListener="#{AlquilerItems.cotizar(nid.value,dias.value)}">
             </p:commandButton>
             <br/><br/>
-            LA COTIZACIÓN ACTUAL ES DE $
+            LA COTIZACIÓN ACTUAL ES DE <br/>$
             <p:outputLabel id="valcot" value="#{AlquilerItems.valcot}">
             </p:outputLabel>
             <br/><br/>
-            <p:commandButton id="aceptar" value="ACEPTAR" update=":alquiler" actionListener="#{AlquilerItems.agregarAlquiler(nid,dias.value)}">
+            <p:commandButton id="aceptar" value="ACEPTAR" update=":alquiler,valcot" actionListener="#{AlquilerItems.agregarAlquiler(nid.value,dias.value)}">
             </p:commandButton>
             </div>
         </h:form>
