@@ -36,7 +36,7 @@ public class ClientesTest {
         ServiciosAlquilerItemsStub sais=new ServiciosAlquilerItemsStub();
         try{
             sais.registrarCliente(nCliente);
-            assertEquals("no existe el cliente",sais.consultarClientes().size(),1);
+            assertEquals("no existe el cliente",sais.consultarClientes().size(),4);
         }catch(Exception e){}
     }
     @Test
@@ -55,7 +55,7 @@ public class ClientesTest {
             assertEquals("no existe el nombre",nuevoC.getDireccion(),copiaC.getDireccion());
             assertEquals("no existe el nombre",nuevoC.getEmail(),copiaC.getEmail());
             assertEquals("no existe el nombre",nuevoC.getTelefono(),copiaC.getTelefono());
-            assertEquals("no existe el cliente",sais.consultarClientes().size(),1);
+            assertEquals("no existe el cliente",sais.consultarClientes().size(),4);
            
         }catch(Exception e){}
             
@@ -81,7 +81,7 @@ public class ClientesTest {
             assertEquals("no existe el nombre",nuevoC.getTelefono(),copiaC.getTelefono());
             assertEquals("no existe el nombre",nuevoC.isVetado(),copiaC.isVetado());
             assertEquals("no existe el nombre",nuevoC.getRentados(),copiaC.getRentados());
-            assertEquals("no existe el cliente",sais.consultarClientes().size(),1);
+            assertEquals("no existe el cliente",sais.consultarClientes().size(),4);
            
         }catch(Exception e){}  
     }
@@ -101,7 +101,7 @@ public class ClientesTest {
             assertEquals("no existe el nombre",nuevoC.getDireccion(),copiaC.getDireccion());
             assertEquals("no existe el nombre",nuevoC.getEmail(),copiaC.getEmail());
             assertEquals("no existe el nombre",nuevoC.getTelefono(),copiaC.getTelefono());
-            assertEquals("no existe el cliente",sais.consultarClientes().size(),1);
+            assertEquals("no existe el cliente",sais.consultarClientes().size(),4);
             sais.registrarCliente(nuevoC);
            
         }catch(Exception e){
